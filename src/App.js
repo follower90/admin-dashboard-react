@@ -9,7 +9,6 @@ import actionCreators from './actionCreators';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { clicked: false };
   }
 
   render() {
@@ -19,16 +18,17 @@ export default class App extends Component {
           <main>
             {this.props.children}
           </main>
-          <Footer clicked={this.state.clicked} />
+          <Footer clicked={this.props.data.clicked} toggleFooterClick={this.props.actions.toggleFooterClick} />
         </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({data: state.clicked});
+const mapStateToProps = (state, ownProps) => ({data: { clicked: state.clicked }});
 
 const mapDispatchToProps = ({dispatch}) => {
+  // creating dispatchers by binding action creators to dispatch function
   return { actions: bindActionCreators(actionCreators, dispatch) };
 };
 
-connect(mapStateToProps, mapDispatchToProps)(App)
+connect(mapStateToProps, mapDispatchToProps)(App);
