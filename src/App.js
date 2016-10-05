@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Header from './layout/Header'
-import Footer from './layout/Footer'
-import * as actions from './Actions'
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+import actionCreators from './actionCreators';
 
 export default class App extends Component {
   constructor(props) {
-    super(props)
-    this.state = { clicked: false }
+    super(props);
+    this.state = { clicked: false };
   }
 
   render() {
@@ -20,8 +21,14 @@ export default class App extends Component {
           </main>
           <Footer clicked={this.state.clicked} />
         </div>
-    )
+    );
   }
 }
 
-connect((state, ownProps) => ({data: state.clicked}), actions)(App)
+const mapStateToProps = (state, ownProps) => ({data: state.clicked});
+
+const mapDispatchToProps = ({dispatch}) => {
+  return { actions: bindActionCreators(actionCreators, dispatch) };
+};
+
+connect(mapStateToProps, mapDispatchToProps)(App)
