@@ -1,22 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
-import { Router, Route, Link, browserHistory } from 'react-router'
-import App from './App'
-
-import Main from './pages/Main'
-import About from './pages/About'
-import NotFound from './pages/NotFound'
-
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import App from './App';
+import Main from './pages/Main';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
+import { TOOGLE_FOOTER_CLICK } from './actionCreators';
 
 function footerReducer(state = {}, action) {
   switch (action.type) {
-    case 'FOOTER_CLICK':
+    case TOOGLE_FOOTER_CLICK:
       return {
         ...state,
-        clicked: action.clicked
+        clicked: !state.clicked // inverse current state
       }
     default:
       return state
