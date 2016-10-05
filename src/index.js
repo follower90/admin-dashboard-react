@@ -8,7 +8,7 @@ import Main from './pages/Main'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
 
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 function footerReducer(state = {}, action) {
@@ -23,7 +23,7 @@ function footerReducer(state = {}, action) {
   }
 }
 
-window.store = createStore(footerReducer)
+let store = createStore(combineReducers({footerReducer}))
 
 
 ReactDOM.render((

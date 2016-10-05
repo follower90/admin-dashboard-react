@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
+import * as actions from './../Actions'
 
 export default class Footer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {clicked: false}
-  }
-
-  toggleClick = (state) => {
-    let clicked = !this.state.clicked
-    this.setState({clicked: clicked})
-    store.dispatch({type: 'FOOTER_CLICK', clicked: clicked})
+  toggleClick = () => {
+    actions.toggleFooterClick(!this.props.clicked)
   }
 
   render() {
-    let clicked = this.state.clicked ? '#c3c3c3' : 'white'
+    let color = this.props.clicked ? 'green' : 'white'
     return (
         <div className="footer" onClick={this.toggleClick}>
-          <nav className="panel panel-default" style={{ backgroundColor: clicked }}>
+          <nav className="panel panel-default" style={{ backgroundColor: color }}>
             <div className="panel-body">
               {new Date().getFullYear()}
             </div>

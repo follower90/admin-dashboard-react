@@ -1,23 +1,11 @@
 import React, { Component } from 'react'
 
 export default class Header extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {clicked: false}
-  }
-
-  componentWillMount() {
-    store.subscribe(() => {
-      let a = store.getState()
-      this.setState({clicked: a.clicked})
-    });
-  }
-
   render() {
-    let clicked = this.state.clicked ? '#c3c3c3' : 'white'
+    let color = this.props.clicked ? 'green' : 'white'
     return (
       <div>
-        <nav className="navbar navbar-default" style={{ backgroundColor: clicked }}>
+        <nav className="navbar navbar-default" style={{ backgroundColor: color }}>
           <div className="container-fluid">
             <div className="navbar-header">
               <a className="navbar-brand" href="/">Brand</a>
