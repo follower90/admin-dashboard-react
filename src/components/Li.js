@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-export default class Li extends Component {
-  render() {
-    return <li className="list-group-item">{this.props.data}</li>
-  }
-}
+const Li = ({data}) => (
+    <li className="list-group-item">{data}</li>
+)
+
+export default Li

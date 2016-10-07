@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 
-export default class Header extends Component {
-  render() {
-    let color = this.props.clicked ? 'green' : 'white'
-    return (
+const Header = ({clicked}) => (
       <div>
-        <nav className="navbar navbar-default" style={{ backgroundColor: color }}>
+        <nav className="navbar navbar-default"  style={{ backgroundColor: clicked ? 'green' : 'white' }}>
           <div className="container-fluid">
             <div className="navbar-header">
               <a className="navbar-brand" href="/">Brand</a>
@@ -17,6 +14,6 @@ export default class Header extends Component {
           </div>
         </nav>
       </div>
-    )
-  }
-}
+)
+
+export default Header

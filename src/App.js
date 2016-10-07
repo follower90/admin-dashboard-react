@@ -1,34 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreators from './actionCreators'
 
-import Header from './layout/Header';
-import Footer from './layout/Footer';
-import actionCreators from './actionCreators';
+import Header from './layout/Header'
+import Footer from './layout/Footer'
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+const App = ({children, data, actions}) => (
+  <div>
+    <Header clicked={data.clicked} />
+      <main>{children}</main>
+    <Footer clicked={data.clicked} toggleFooterClick={actions.toggleFooterClick} />
+  </div>
+)
 
-  render() {
-    return (
-        <div>
-          <Header clicked={this.state.clicked} />
-          <main>
-            {this.props.children}
-          </main>
-          <Footer clicked={this.props.data.clicked} toggleFooterClick={this.props.actions.toggleFooterClick} />
-        </div>
-    );
-  }
-}
+const mapStateToProps = (state, ownProps) => ({ data: { clicked: state.clickReducer.clicked }})
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(actionCreators, dispatch) })
 
-const mapStateToProps = (state, ownProps) => ({data: { clicked: state.clicked }});
-
-const mapDispatchToProps = ({dispatch}) => {
-  // creating dispatchers by binding action creators to dispatch function
-  return { actions: bindActionCreators(actionCreators, dispatch) };
-};
-
-connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
