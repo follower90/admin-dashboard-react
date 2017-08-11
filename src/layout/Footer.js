@@ -1,15 +1,7 @@
-import React, { Component } from 'react'
-import actionCreators from './../actionCreators'
-import { connect } from 'react-redux'
+import React from 'react'
 
-const Footer = ({clicked, toggleFooterClick}) => (
-    <div className="footer" onClick={toggleFooterClick}>
-      <nav className="panel panel-default" style={{ backgroundColor: clicked ? 'green' : 'white' }}>
-        <div className="panel-body">
-          {new Date().getFullYear()}
-        </div>
-      </nav>
-    </div>
+const Footer = () => (
+    <div className="footer"></div>
 )
 
 export default Footer

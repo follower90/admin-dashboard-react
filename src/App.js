@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import actionCreators from './actionCreators'
+import React from 'react'
 
 import Header from './layout/Header'
 import Footer from './layout/Footer'
+import Sidebar from './layout/Sidebar'
 
-const App = ({children, data, actions}) => (
+const App = ({children}) => (
   <div>
-    <Header clicked={data.clicked} />
+    <Header/>
+    <div className="container" id="page-wrapper">
+      <Sidebar/>
       <main>{children}</main>
-    <Footer clicked={data.clicked} toggleFooterClick={actions.toggleFooterClick} />
+    </div>
+    <Footer/>
   </div>
 )
 
-const mapStateToProps = (state, ownProps) => ({ data: { clicked: state.clickReducer.clicked }})
-const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(actionCreators, dispatch) })
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

@@ -1,32 +1,43 @@
+import css from 'bootstrap-css'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { createStore, combineReducers } from 'redux'
+import { Router, Route, browserHistory } from 'react-router'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { Provider } from 'react-redux'
 
 import App from './App'
-import Main from './pages/Main'
-import About from './pages/About'
 import NotFound from './pages/NotFound'
-import { TOGGLE_FOOTER_CLICK } from './actionCreators'
 
-function clickReducer(state = { clicked: false }, action) {
-  switch (action.type) {
-    case TOGGLE_FOOTER_CLICK:
-      return {...state, clicked: !state.clicked}
-    default:
-      return state
-  }
-}
+import Main from './pages/Main'
+import Menu from './pages/Menu'
+import MenuForm from './pages/MenuForm'
+import User from './pages/User'
 
-let store = createStore(combineReducers({clickReducer}))
+import thunk from 'redux-thunk';
+
+import reducers from './Reducers'
+import menuReducer from './reducers/MenuReducer'
+import usersReducer from './reducers/UsersReducer'
+
+const store = createStore(
+  combineReducers({...reducers, menuReducer, usersReducer, routing: routerReducer}),
+  applyMiddleware(thunk)
+);
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render((
     <Provider store={store}>
-      <Router history={browserHistory}>
+      <Router history={history}>
         <Route component={App}>
-          <Route path="/" component={Main}/>
-          <Route path="about" component={About} />
+          <Route path="/admin" component={Main}/>
+
+          <Route path="/admin/menu" component={Menu} />
+          <Route path="/admin/menu/edit/:id" component={MenuForm} />
+
+          <Route path="/admin/user" component={User}/>
           <Route path="*" component={NotFound}/>
         </Route>
       </Router>
