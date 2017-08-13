@@ -1,7 +1,6 @@
 import Main from './pages/Main'
-import Menu from './pages/Menu'
-import MenuForm from './pages/MenuForm'
-import User from './pages/User'
+import Menu from './pages/menu/Index'
+import MenuForm from './pages/menu/Edit'
 import NotFound from './pages/NotFound'
 
 const routes = [
@@ -20,10 +19,6 @@ const routes = [
   {
     path: '/admin/menu/edit/:id',
     component: MenuForm,
-  },
-  {
-    path: '/admin/user',
-    component: User,
   },
   {
     path: '*',
