@@ -6,8 +6,7 @@ import { Router, Route, browserHistory } from 'react-router'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk';
-import reducers from './Reducers'
+import thunk from 'redux-thunk'
 import menuReducer from './reducers/MenuReducer'
 import usersReducer from './reducers/UsersReducer'
 
@@ -15,7 +14,7 @@ import App from './App'
 import routes from './routes'
 
 const store = createStore(
-  combineReducers({...reducers, menuReducer, usersReducer, routing: routerReducer}),
+  combineReducers({menuReducer, usersReducer, routing: routerReducer}),
   applyMiddleware(thunk)
 );
 

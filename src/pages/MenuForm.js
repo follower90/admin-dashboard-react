@@ -12,7 +12,7 @@ const enhance = compose(
       this.props.dispatch(itemFetchData(this.props.routeParams.id))
     },
     componentWillReceiveProps(props) {
-      const { item, url, name }  = props;
+      const { item, url, name } = props;
       this.setState({
         name: name || item.name,
         url: url || item.url,
